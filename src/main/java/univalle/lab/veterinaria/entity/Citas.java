@@ -20,7 +20,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cita {
+public class Citas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,12 +36,12 @@ public class Cita {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mascota_id", nullable = false)
     @NotNull(message = "Debe seleccionar una mascota")
-    private Mascota mascota;
+    private Mascotas mascota;
 
     @NotBlank(message = "El nombre del veterinario es obligatorio")
     private String veterinario;
 
     @OneToMany(mappedBy = "cita", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private List<Tratamiento> tratamientos = new ArrayList<>();
+    private List<Tratamientos> tratamientos = new ArrayList<>();
 }
