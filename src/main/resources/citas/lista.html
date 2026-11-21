@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Citas</title></head>
+<body>
+<a th:href="@{/web}">Inicio</a>
+<h1>Citas médicas</h1>
+<a th:href="@{/web/citas/nueva}">Agregar cita</a>
+<table border="1">
+    <tr><th>Fecha</th><th>Motivo</th><th>Mascota</th><th>Veterinario</th><th>Acciones</th></tr>
+    <tr th:each="c : ${citas}">
+        <td th:text="${c.fecha}"></td>
+        <td th:text="${c.motivo}"></td>
+        <td th:text="${c.mascota.nombre}"></td>
+        <td th:text="${c.veterinario}"></td>
+        <td>
+            <a th:href="@{/web/citas/editar/{id}(id=${c.id})}">Editar</a>
+            <a th:href="@{/web/tratamientos/nuevo(citaId=${c.id})}">Agregar tratamiento</a>
+            <form th:action="@{/web/citas/eliminar/{id}(id=${c.id})}" method="post" style="display:inline"
+                  onsubmit="return confirm('Se eliminará la cita y sus tratamientos. ¿Continuar?')">
+                <button type="submit">Eliminar</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

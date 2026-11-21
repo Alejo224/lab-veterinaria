@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Dueños</title></head>
+<body>
+<a th:href="@{/web}">Inicio</a>
+<h1>Dueños</h1>
+<a th:href="@{/web/duenos/nuevo}">Agregar dueño</a>
+<table border="1">
+    <tr><th>Nombre</th><th>Teléfono</th><th>Correo</th><th>Dirección</th><th>Acciones</th></tr>
+    <tr th:each="d : ${duenos}">
+        <td th:text="${d.nombre}"></td>
+        <td th:text="${d.telefono}"></td>
+        <td th:text="${d.correo}"></td>
+        <td th:text="${d.direccion}"></td>
+        <td>
+            <a th:href="@{/web/duenos/editar/{id}(id=${d.id})}">Editar</a>
+            <form th:action="@{/web/duenos/eliminar/{id}(id=${d.id})}" method="post" style="display:inline"
+                  onsubmit="return confirm('Se eliminará el dueño y todas sus mascotas, citas y tratamientos. ¿Continuar?')">
+                <button type="submit">Eliminar</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

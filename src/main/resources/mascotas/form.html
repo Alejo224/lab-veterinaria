@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Dueño</title></head>
+<body>
+<h1>Formulario de dueño</h1>
+<form th:action="@{/web/duenos/guardar}" th:object="${dueno}" method="post">
+    <ul th:if="${#fields.hasErrors('*')}" style="color:red">
+        <li th:each="e : ${#fields.allErrors()}" th:text="${e}"></li>
+    </ul>
+    <input type="hidden" th:field="*{id}">
+
+    <label>Nombre:</label> <input type="text" th:field="*{nombre}"><br>
+    <label>Teléfono:</label> <input type="text" th:field="*{telefono}"><br>
+    <label>Correo:</label> <input type="text" th:field="*{correo}"><br>
+    <label>Dirección:</label> <input type="text" th:field="*{direccion}"><br>
+
+    <button type="submit">Guardar</button>
+    <a th:href="@{/web/duenos}">Cancelar</a>
+</form>
+</body>
+</html>
