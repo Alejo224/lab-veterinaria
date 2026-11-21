@@ -2,6 +2,7 @@ package univalle.lab.veterinaria.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,6 @@ public class Tratamientos {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cita_id", nullable = false)
-    @NotBlank(message = "Debe asociar una cita")
+    @NotNull(message = "Debe asociar una cita")
     private Citas cita;
 }
