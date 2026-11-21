@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Tratamiento</title></head>
+<body>
+<h1>Formulario de tratamiento</h1>
+<form th:action="@{/web/tratamientos/guardar}" th:object="${tratamiento}" method="post">
+    <ul th:if="${#fields.hasErrors('*')}" style="color:red">
+        <li th:each="e : ${#fields.allErrors()}" th:text="${e}"></li>
+    </ul>
+    <input type="hidden" th:field="*{id}">
+
+    <label>Descripción:</label> <input type="text" th:field="*{descripcion}"><br>
+    <label>Dosis:</label> <input type="text" th:field="*{dosis}"><br>
+
+    <label>Cita:</label>
+    <select th:field="*{cita.id}" required>
+        <option value="">-- Seleccione --</option>
+        <option th:each="c : ${citas}" th:value="${c.id}"
+                th:text="${c.fecha + ' - ' + c.mascota.nombre + ' (' + c.motivo + ')'}"></option>
+    </select><br>
+
+    <button type="submit">Guardar</button>
+    <a th:href="@{/web/tratamientos}">Cancelar</a>
+</form>
+</body>
+</html>
