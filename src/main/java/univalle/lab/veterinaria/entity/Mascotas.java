@@ -19,7 +19,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Mascota {
+public class Mascotas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,9 +41,9 @@ public class Mascota {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dueno_id", nullable = false)
     @NotNull(message = "Debe asignar un dueño")
-    private Dueno dueno;
+    private Duenos dueno;
 
     @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private List<Cita> citas = new ArrayList<>();
+    private List<Citas> citas = new ArrayList<>();
 }

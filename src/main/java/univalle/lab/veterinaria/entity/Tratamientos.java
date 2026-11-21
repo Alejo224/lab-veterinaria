@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tratamiento {
+public class Tratamientos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,5 +28,5 @@ public class Tratamiento {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cita_id", nullable = false)
     @NotBlank(message = "Debe asociar una cita")
-    private Cita cita;
+    private Citas cita;
 }

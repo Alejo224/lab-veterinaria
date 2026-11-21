@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Dueno {
+public class Duenos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,5 +37,5 @@ public class Dueno {
 
     @OneToMany(mappedBy = "dueno", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private List<Mascota> mascotas = new ArrayList<>();
+    private List<Mascotas> mascotas = new ArrayList<>();
 }
