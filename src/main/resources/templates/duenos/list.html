@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Dueños</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<aside id="sidebar">
+    <div class="sidebar-header">🐾 VetSystem</div>
+    <ul class="sidebar-menu">
+        <li><a th:href="@{/}">🏠 Inicio</a></li>
+        <li><a th:href="@{/view/mascotas}">🐶 Mascotas</a></li>
+        <li><a th:href="@{/view/duenos}" class="active">👤 Dueños</a></li>
+        <li><a th:href="@{/view/citas}">📅 Citas</a></li>
+        <li><a th:href="@{/view/tratamientos}">💊 Tratamientos</a></li>
+    </ul>
+</aside>
+
+<main class="main-content">
+    <div class="topbar">
+        <button id="menuToggle">☰</button>
+        <h1>Listado de Dueños</h1>
+    </div>
+
+    <div th:if="${message}" class="alert-success" th:text="${message}"></div>
+
+    <div class="card">
+        <div class="toolbar">
+            <div class="search-box">
+                <input type="text" id="buscarUsuario" placeholder="Buscar dueño...">
+                <span class="badge-count">Mostrando: <strong id="usuariosVisibles">0</strong></span>
+            </div>
+            <a th:href="@{/view/duenos/form}" class="btn btn-primary">+ Nuevo Dueño</a>
+        </div>
+
+        <div class="table-responsive">
+            <table id="tablaUsuarios">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre Completo</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th>Dirección</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="d : ${duenos}">
+                    <td th:text="${d.id}"></td>
+                    <td th:text="${d.nombre}"></td>
+                    <td th:text="${d.telefono}"></td>
+                    <td th:text="${d.correo}"></td>
+                    <td th:text="${d.direccion}"></td>
+                    <td class="actions-cell">
+                        <a th:href="@{/view/duenos/edit/{id}(id=${d.id})}" class="btn btn-warning">Editar</a>
+                        <form th:action="@{/view/duenos/delete/{id}(id=${d.id})}" method="post" class="form-delete">
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Dueño</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<aside id="sidebar">
+    <div class="sidebar-header">🐾 VetSystem</div>
+    <ul class="sidebar-menu">
+        <li><a th:href="@{/}">🏠 Inicio</a></li>
+        <li><a th:href="@{/view/mascotas}">🐶 Mascotas</a></li>
+        <li><a th:href="@{/view/duenos}" class="active">👤 Dueños</a></li>
+        <li><a th:href="@{/view/citas}">📅 Citas</a></li>
+        <li><a th:href="@{/view/tratamientos}">💊 Tratamientos</a></li>
+    </ul>
+</aside>
+
+<main class="main-content">
+    <div class="topbar">
+        <button id="menuToggle">☰</button>
+        <h1 th:text="${duenos.id == null ? 'Registrar Dueño' : 'Editar Dueño'}"></h1>
+    </div>
+
+    <div class="card form-container">
+        <form th:action="@{/view/duenos/save}" th:object="${duenos}" method="post">
+            <input type="hidden" th:field="*{id}">
+
+            <div class="form-group">
+                <label for="nombre">Nombre Completo</label>
+                <input type="text" id="nombre" th:field="*{nombre}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="text" id="telefono" th:field="*{telefono}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="correo">Correo Electrónico</label>
+                <input type="email" id="correo" th:field="*{correo}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="direccion">Dirección</label>
+                <input type="text" id="direccion" th:field="*{direccion}" required>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a th:href="@{/view/duenos}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</main>
+
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

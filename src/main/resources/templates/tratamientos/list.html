@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Tratamientos</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<aside id="sidebar">
+    <div class="sidebar-header">🐾 VetSystem</div>
+    <ul class="sidebar-menu">
+        <li><a th:href="@{/}">🏠 Inicio</a></li>
+        <li><a th:href="@{/view/mascotas}">🐶 Mascotas</a></li>
+        <li><a th:href="@{/view/duenos}">👤 Dueños</a></li>
+        <li><a th:href="@{/view/citas}">📅 Citas</a></li>
+        <li><a th:href="@{/view/tratamientos}" class="active">💊 Tratamientos</a></li>
+    </ul>
+</aside>
+
+<main class="main-content">
+    <div class="topbar">
+        <button id="menuToggle">☰</button>
+        <h1>Tratamientos Aplicados</h1>
+    </div>
+
+    <div th:if="${message}" class="alert-success" th:text="${message}"></div>
+
+    <div class="card">
+        <div class="toolbar">
+            <div class="search-box">
+                <input type="text" id="buscarUsuario" placeholder="Buscar medicamento o cita...">
+                <span class="badge-count">Mostrando: <strong id="usuariosVisibles">0</strong></span>
+            </div>
+            <a th:href="@{/view/tratamientos/form}" class="btn btn-primary">+ Nuevo Tratamiento</a>
+        </div>
+
+        <div class="table-responsive">
+            <table id="tablaUsuarios">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descripción (Medicamento / Proc.)</th>
+                    <th>Dosis / Frecuencia</th>
+                    <th>Cita Asociada</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="t : ${tratamientos}">
+                    <td th:text="${t.id}"></td>
+                    <td th:text="${t.descripcion}"></td>
+                    <td th:text="${t.dosis}"></td>
+                    <td th:text="${t.cita != null ? 'Cita #' + t.cita.id + ' - ' + t.cita.fecha + ' (' + t.cita.mascota.nombre + ')' : 'Sin cita'}"></td>
+                    <td class="actions-cell">
+                        <a th:href="@{/view/tratamientos/edit/{id}(id=${t.id})}" class="btn btn-warning">Editar</a>
+                        <form th:action="@{/view/tratamientos/delete/{id}(id=${t.id})}" method="post" class="form-delete">
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

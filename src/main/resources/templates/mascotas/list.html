@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Mascotas</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<aside id="sidebar">
+    <div class="sidebar-header">🐾 VetSystem</div>
+    <ul class="sidebar-menu">
+        <li><a th:href="@{/}">🏠 Inicio</a></li>
+        <li><a th:href="@{/view/mascotas}" class="active">🐶 Mascotas</a></li>
+        <li><a th:href="@{/view/duenos}">👤 Dueños</a></li>
+        <li><a th:href="@{/view/citas}">📅 Citas</a></li>
+        <li><a th:href="@{/view/tratamientos}">💊 Tratamientos</a></li>
+    </ul>
+</aside>
+
+<main class="main-content">
+    <div class="topbar">
+        <button id="menuToggle">☰</button>
+        <h1>Listado de Mascotas</h1>
+    </div>
+
+    <div th:if="${message}" class="alert-success" th:text="${message}"></div>
+
+    <div class="card">
+        <div class="toolbar">
+            <div class="search-box">
+                <input type="text" id="buscarUsuario" placeholder="Buscar mascota o dueño...">
+                <span class="badge-count">Mostrando: <strong id="usuariosVisibles">0</strong></span>
+            </div>
+            <a th:href="@{/view/mascotas/form}" class="btn btn-primary">+ Nueva Mascota</a>
+        </div>
+
+        <div class="table-responsive">
+            <table id="tablaUsuarios">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Especie</th>
+                    <th>Raza</th>
+                    <th>Edad</th>
+                    <th>Dueño</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="m : ${mascotas}">
+                    <td th:text="${m.id}"></td>
+                    <td th:text="${m.nombre}"></td>
+                    <td th:text="${m.especie}"></td>
+                    <td th:text="${m.raza}"></td>
+                    <td th:text="${m.edad + ' años'}"></td>
+                    <td th:text="${m.dueno != null ? m.dueno.nombre : 'Sin dueño'}"></td>
+                    <td class="actions-cell">
+                        <a th:href="@{/view/mascotas/edit/{id}(id=${m.id})}" class="btn btn-warning">Editar</a>
+                        <form th:action="@{/view/mascotas/delete/{id}(id=${m.id})}" method="post" class="form-delete">
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>
