@@ -1,10 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicio - Clínica Veterinaria</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <aside id="sidebar">
+      <div class="sidebar-header">🐾 VetSystem</div>
+      <ul class="sidebar-menu">
+        <li><a th:href="@{/}" class="active">🏠 Inicio</a></li>
+        <li><a th:href="@{/view/mascotas}">🐶 Mascotas</a></li>
+        <li><a th:href="@{/view/duenos}">👤 Dueños</a></li>
+        <li><a th:href="@{/view/citas}">📅 Citas</a></li>
+        <li><a th:href="@{/view/tratamientos}">💊 Tratamientos</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <div class="topbar">
+        <button id="menuToggle">☰</button>
+        <h1>Sistema de Gestión Veterinaria</h1>
+      </div>
+
+      <div class="card">
+        <h2 style="margin-bottom: 0.75rem">
+          Bienvenido al Panel Administrativo
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem">
+          Selecciona un módulo del menú lateral o usa los accesos directos para
+          gestionar la clínica:
+        </p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap">
+          <a th:href="@{/view/duenos}" class="btn btn-primary"
+            >👤 Gestionar Dueños</a
+          >
+          <a th:href="@{/view/mascotas}" class="btn btn-primary"
+            >🐶 Gestionar Mascotas</a
+          >
+          <a th:href="@{/view/citas}" class="btn btn-primary"
+            >📅 Gestionar Citas</a
+          >
+          <a th:href="@{/view/tratamientos}" class="btn btn-primary"
+            >💊 Gestionar Tratamientos</a
+          >
+        </div>
+      </div>
+    </main>
+
+    <script th:src="@{/js/script.js}"></script>
+  </body>
 </html>
